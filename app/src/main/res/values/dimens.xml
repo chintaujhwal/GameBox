@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="poster_width">110dp</dimen>
+    <dimen name="poster_height">154dp</dimen>
+    <dimen name="news_card_image_height">200dp</dimen>
+    <dimen name="corner_radius">8dp</dimen>
+    <dimen name="space">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+</resources>

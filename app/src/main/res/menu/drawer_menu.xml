@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/view_carousel_24"
+            android:title="Popular" />
+
+        <item
+            android:id="@+id/search"
+            android:icon="@drawable/search_24"
+            android:title="Search" />
+
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/profile_24"
+            android:title="Profile" />
+
+        <item
+            android:id="@+id/bookmarks"
+            android:icon="@drawable/bookmark_24"
+            android:title="Bookmarks" />
+
+        <item
+            android:id="@+id/reviews"
+            android:icon="@drawable/reviews_24"
+            android:title="Reviews" />
+
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/settings_suggest_24dp"
+            android:title="Settings" />
+    </group>
+
+</menu>
