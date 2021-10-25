@@ -1,6 +1,10 @@
 package com.example.gamebox;
 
-import androidx.annotation.NonNull;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -11,24 +15,8 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.Toast;
-
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,21 +24,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Toolbar actionBarToolbar = (Toolbar) findViewById(R.id.actionbar_home);
-        actionBarToolbar.setTitle("");
-        setSupportActionBar(actionBarToolbar);
-
-
-
-        ImageView searchButton = actionBarToolbar.findViewById(R.id.search);
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, SearchActivity.class);
-                startActivity(i);
-            }
-        });
 
         TabLayout homeTabLayout = findViewById(R.id.home_tab_layout);
         ViewPager2 homeViewPager = findViewById(R.id.home_view_pager);
@@ -79,6 +52,49 @@ public class MainActivity extends AppCompatActivity {
                 homeTabLayout.selectTab(homeTabLayout.getTabAt(position));
             }
         });
+
+        Toolbar customToolbar = findViewById(R.id.toolbar_custom);
+        setSupportActionBar(customToolbar);
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, customToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.search:
+                        startActivity(new Intent(MainActivity.this, SearchActivity.class));
+                        return true;
+                    case R.id.profile:
+                        startActivity(new Intent(MainActivity.this, GameActivity.class));
+                        return true;
+                    case R.id.bookmarks:
+                        startActivity(new Intent(MainActivity.this, BookmarksActivity.class));
+                        return true;
+                }
+                return true;
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.search_item:
+                startActivity(new Intent(this, SearchActivity.class));
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 
@@ -91,8 +107,10 @@ class HomeFragmentAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position) {
-            case 1: return new NewsFragment();
-            case 2:return new ComingSoonFragment();
+            case 1:
+                return new NewsFragment();
+            case 2:
+                return new ComingSoonFragment();
         }
         return new GamesFragment();
     }

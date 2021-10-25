@@ -9,7 +9,7 @@
         android:id="@+id/rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="4dp"
+        android:layout_marginEnd="4dp"
         android:text="4.0"
         android:textColor="@color/white" />
 
@@ -36,7 +36,6 @@
     <ImageView
         style="@style/rating_star"
         android:src="@drawable/star_24"
-        android:layout_height="match_parent"
-        app:tint="@color/grey_3" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

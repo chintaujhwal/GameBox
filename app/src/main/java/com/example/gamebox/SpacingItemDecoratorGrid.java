@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class SpacingItemDecoratorGrid extends RecyclerView.ItemDecoration {
 
-    private int spacing;
+    private final int spacing;
 
     SpacingItemDecoratorGrid(int spacing) {
         this.spacing = spacing;

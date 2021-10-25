@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,25 +34,45 @@ public class GamesFragment extends Fragment {
         SpacingItemDecorator Spacing = new SpacingItemDecorator((int) (16 * (this.getResources().getDisplayMetrics().density)));
         recyclerView.addItemDecoration(Spacing);
 
-        Button gamePage = (Button) rootView.findViewById(R.id.game_page_nav);
-        gamePage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getActivity(), GamePage.class);
-                startActivity(i);
-            }
-        });
-
-        Button bookmarksPage = (Button) rootView.findViewById(R.id.bookmarks_page_nav);
-        bookmarksPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getActivity(), BookmarksActivity.class);
-                startActivity(i);
-            }
-        });
-
         return rootView;
     }
 }
+
+class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.MyViewHolder> {
+
+    ArrayList<Game> gamesList;
+
+    GamesAdapter(ArrayList<Game> gamesList) {
+        this.gamesList = gamesList;
+    }
+
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.game_card, parent, false);
+        return new MyViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        Game currentGame = gamesList.get(position);
+        holder.gameCard.setImageResource(currentGame.getPoster());
+    }
+
+    @Override
+    public int getItemCount() {
+        return gamesList.size();
+    }
+
+    class MyViewHolder extends RecyclerView.ViewHolder {
+
+        ImageView gameCard;
+
+        MyViewHolder(View itemView) {
+            super(itemView);
+            gameCard = itemView.findViewById(R.id.game_card);
+        }
+    }
+}
+
 

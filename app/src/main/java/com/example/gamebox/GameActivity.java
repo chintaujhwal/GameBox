@@ -1,47 +1,30 @@
 package com.example.gamebox;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.ImageView;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-
 import com.google.android.material.tabs.TabLayout;
 
-public class GamePage extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         ImageView gamePoster = findViewById(R.id.game_poster);
 
-        Toolbar actionBarGame = findViewById(R.id.actionbar_game);
-        actionBarGame.setTitle("");
-        setSupportActionBar(actionBarGame);
-
-        ImageView backButton = actionBarGame.findViewById(R.id.back);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
-        if(gamePoster.getDrawable() == null)
+        if (gamePoster.getDrawable() == null)
             gamePoster.setImageResource(R.drawable.image_placeholder);
 
         TabLayout gameTabLayout = findViewById(R.id.game_tab_layout);
@@ -72,6 +55,14 @@ public class GamePage extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            default: finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
 
 class GameFragmentAdapter extends FragmentStateAdapter {
@@ -83,8 +74,10 @@ class GameFragmentAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position) {
-            case 1: return new RequirementsFragment();
-            case 2: return new LevelsFragment();
+            case 1:
+                return new RequirementsFragment();
+            case 2:
+                return new LevelsFragment();
         }
         return new DetailsFragment();
     }

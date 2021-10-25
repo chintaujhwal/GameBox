@@ -8,11 +8,8 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <include layout="@layout/actionbar_bookmarks" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bookmarksRecyclerView"
-        android:layout_centerHorizontal="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp"

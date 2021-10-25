@@ -4,15 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GamePage"
+    tools:context=".GameActivity"
     android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <include layout="@layout/actionbar_game" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -164,7 +162,6 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/game_tab_layout"
-            style="@style/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
