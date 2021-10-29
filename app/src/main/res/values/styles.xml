@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="title_1">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="title_2">
-        <item name="android:textColor">@color/grey_3</item>
-        <item name="android:textStyle">bold</item>
-    </style>
 
     <style name="content">
         <item name="android:textColor">@color/grey_4</item>
+    </style>
+
+    <style name="searchView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="queryBackground">@null</item>
+        <item name="clockIcon">@drawable/close_24</item>
+        <item name="searchIcon">@null</item>
+        <item name="iconifiedByDefault">false</item>
+        <item name="queryHint">Search...</item>
     </style>
 
     <style name="rating_star">
@@ -20,14 +21,8 @@
         <item name="tint">@color/orange</item>
     </style>
 
-    <style name="searchView" >
-        <item name="android:layout_width" >match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="queryBackground">@null</item>
-        <item name="clockIcon">@drawable/close_24</item>
-        <item name="searchIcon">@null</item>
-        <item name="iconifiedByDefault">false</item>
-        <item name="queryHint">Search...</item>
+    <style name="tab_layout">
+        <item name="tabMode">scrollable</item>
     </style>
 
 </resources>

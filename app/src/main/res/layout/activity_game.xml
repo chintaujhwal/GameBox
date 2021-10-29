@@ -163,7 +163,8 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/game_tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            style="@style/tab_layout">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
@@ -188,21 +189,11 @@
             android:layout_height="wrap_content"
             android:padding="16dp" />
 
-        <TextView
-            style="@style/title_1"
-            android:textSize="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Reviews"
-            android:layout_marginLeft="16dp"/>
-
         <LinearLayout
-            android:paddingLeft="@dimen/space"
-            android:paddingRight="@dimen/space"
-            android:paddingTop="@dimen/space"
+            android:padding="@dimen/space"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical" >
 
             <include
                 android:layout_marginBottom="16dp"
@@ -211,10 +202,10 @@
                 layout="@layout/review_card" />
 
             <include
-                android:layout_marginBottom="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 layout="@layout/review_card" />
+
         </LinearLayout>
 
         <TextView
@@ -224,8 +215,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="All Reviews"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="@dimen/space"
             android:textColor="@color/grey_4"/>
+
     </LinearLayout>
 
 </ScrollView>

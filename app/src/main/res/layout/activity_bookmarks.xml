@@ -4,11 +4,10 @@
     android:id="@+id/bookmarksGridView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:gravity="center"
     android:numColumns="3"
-    android:stretchMode="columnWidth"
-    android:verticalSpacing="16dp"
+    android:padding="@dimen/space"
+    android:verticalSpacing="@dimen/space"
     tools:context=".BookmarksActivity">
 
 </GridView>

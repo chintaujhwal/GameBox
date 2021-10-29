@@ -5,5 +5,4 @@
     <dimen name="news_card_image_height">200dp</dimen>
     <dimen name="corner_radius">4dp</dimen>
     <dimen name="space">16dp</dimen>
-    <dimen name="margin">16dp</dimen>
 </resources>

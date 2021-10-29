@@ -29,7 +29,7 @@ public class GamesFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(new GamesAdapter(gamesList));
 
-        SpacingItemDecorator Spacing = new SpacingItemDecorator((int) getResources().getDimension(R.dimen.margin));
+        SpacingItemDecorator Spacing = new SpacingItemDecorator((int) getResources().getDimension(R.dimen.space));
         recyclerView.addItemDecoration(Spacing);
 
         return rootView;

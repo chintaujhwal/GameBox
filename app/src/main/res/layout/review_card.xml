@@ -45,13 +45,13 @@
 
     <TextView
         android:id="@+id/review_user_content"
-        android:layout_toRightOf="@id/review_card_view"
+        style="@style/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/review_relative_layout"
-        android:maxLines="4"
+        android:layout_toRightOf="@id/review_card_view"
         android:ellipsize="end"
-        style="@style/content"
-        android:text="There were a few things I like about this game, although it fades compared to the fantastic experience I had with the first new tomb raider from 2014."/>
+        android:maxLines="4"
+        android:text="There were a few things I like about this game, although it fades compared to the fantastic experience I had with the first new tomb raider from 2014." />
 
 </RelativeLayout>
