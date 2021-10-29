@@ -69,9 +69,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.search:
                         startActivity(new Intent(MainActivity.this, SearchActivity.class));
                         return true;
-                    case R.id.profile:
-                        startActivity(new Intent(MainActivity.this, GameActivity.class));
-                        return true;
                     case R.id.bookmarks:
                         startActivity(new Intent(MainActivity.this, BookmarksActivity.class));
                         return true;

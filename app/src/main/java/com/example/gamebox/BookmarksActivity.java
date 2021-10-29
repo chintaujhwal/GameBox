@@ -1,8 +1,17 @@
 package com.example.gamebox;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
+import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,14 +33,9 @@ public class BookmarksActivity extends AppCompatActivity {
             gamesList.add(new Game(R.drawable.pubg));
         }
 
-        RecyclerView bookmarksRecyclerView = findViewById(R.id.bookmarksRecyclerView);
-        GamesAdapter adapter = new GamesAdapter(gamesList);
-
-        bookmarksRecyclerView.setLayoutManager(new GridLayoutManager(this, 3, LinearLayoutManager.VERTICAL, false));
-        bookmarksRecyclerView.setAdapter(adapter);
-
-        SpacingItemDecoratorGrid Spacing = new SpacingItemDecoratorGrid((int) (8 * (getApplicationContext().getResources().getDisplayMetrics().density)));
-        bookmarksRecyclerView.addItemDecoration(Spacing);
+        GridView gridView = findViewById(R.id.bookmarksGridView);
+        BookmarksAdapter adapter = new BookmarksAdapter(BookmarksActivity.this, gamesList);
+        gridView.setAdapter(adapter);
     }
 
     @Override
@@ -40,5 +44,26 @@ public class BookmarksActivity extends AppCompatActivity {
             default: finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+}
+
+class BookmarksAdapter extends ArrayAdapter<Game> {
+
+    public BookmarksAdapter(Context context, ArrayList<Game> games) {
+        super(context, 0, games);
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if(convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.game_card, parent, false);
+        }
+
+        Game currentGame = getItem(position);
+
+        ImageView poster = convertView.findViewById(R.id.game_card);
+        poster.setImageResource(currentGame.getPoster());
+
+        return convertView;
     }
 }
