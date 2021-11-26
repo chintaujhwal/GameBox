@@ -12,7 +12,7 @@
         android:layout_marginRight="@dimen/space">
 
         <ImageView
-            android:src="@drawable/face_3"
+            android:src="@drawable/face"
             android:id="@+id/review_user_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -36,10 +36,10 @@
             android:text="Emma Stone" />
 
         <include
-            android:layout_alignParentRight="true"
-            android:layout_height="wrap_content"
+            layout="@layout/rating_stars"
             android:layout_width="wrap_content"
-            layout="@layout/rating_stars" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" />
 
     </RelativeLayout>
 

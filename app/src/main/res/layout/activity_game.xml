@@ -85,7 +85,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/space">
+            android:layout_margin="@dimen/space">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -155,10 +155,12 @@
             style="@style/content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/space"
-            android:paddingRight="@dimen/space"
-            android:paddingBottom="@dimen/space"
+            android:layout_marginLeft="@dimen/space"
+            android:layout_marginRight="@dimen/space"
+            android:layout_marginBottom="@dimen/space"
             android:text="Shadow of the Tomb Raider is a 2018 action-adventure video game developed by Eidos-Montréal and published by Square Enix's European subsidiary." />
+
+        <View style="@style/line" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/game_tab_layout"
@@ -186,11 +188,23 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/game_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:padding="16dp" />
 
+        <View style="@style/line" />
+
+        <TextView
+            style="@style/title_1"
+            android:textSize="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reviews"
+            android:layout_marginTop="@dimen/space"
+            android:layout_marginLeft="@dimen/space" />
+
         <LinearLayout
-            android:padding="@dimen/space"
+            android:layout_margin="@dimen/space"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
@@ -217,7 +231,6 @@
             android:text="All Reviews"
             android:layout_marginBottom="@dimen/space"
             android:textColor="@color/grey_4"/>
-
     </LinearLayout>
 
 </ScrollView>

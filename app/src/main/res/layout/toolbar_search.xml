@@ -6,6 +6,6 @@
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"
-        style="@style/searchView"/>
+        style="@style/search_view"/>
 
 </androidx.appcompat.widget.Toolbar>

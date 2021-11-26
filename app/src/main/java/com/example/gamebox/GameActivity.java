@@ -75,11 +75,11 @@ class GameFragmentAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 1:
-                return new RequirementsFragment();
+                return new GameRequirementsFragment();
             case 2:
-                return new LevelsFragment();
+                return new GameLevelsFragment();
         }
-        return new DetailsFragment();
+        return new GameDetailsFragment();
     }
 
     @Override

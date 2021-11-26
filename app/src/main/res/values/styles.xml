@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    
     <style name="content">
         <item name="android:textColor">@color/grey_4</item>
     </style>
 
-    <style name="searchView">
+    <style name="search_view">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="queryBackground">@null</item>
@@ -18,11 +18,19 @@
     <style name="rating_star">
         <item name="android:layout_width">18dp</item>
         <item name="android:layout_marginLeft">4dp</item>
-        <item name="tint">@color/orange</item>
+        <item name="tint">?attr/colorPrimary</item>
     </style>
 
-    <style name="tab_layout">
-        <item name="tabMode">scrollable</item>
+    <style name="line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/grey_4</item>
+        <item name="android:alpha">0.4</item>
+    </style>
+
+    <style name="tab_text_appearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">16dp</item>
     </style>
 
 </resources>
