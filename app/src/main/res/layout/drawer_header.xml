@@ -23,7 +23,7 @@
         style="@style/title_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rocio Crusset"
+        android:id="@+id/username"
         android:textSize="18sp"/>
 
 </LinearLayout>

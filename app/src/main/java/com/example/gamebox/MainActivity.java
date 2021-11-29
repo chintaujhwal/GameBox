@@ -4,7 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -17,13 +21,31 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
+    private FirebaseAuth auth;
+    private FirebaseDatabase db;
+    private DatabaseReference ref;
+    private String userUID;
+
+    private TextView mUsername;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        auth=FirebaseAuth.getInstance();
+        db=FirebaseDatabase.getInstance();
+        ref=db.getReference();
+
+        userUID=auth.getCurrentUser().getUid();
 
         TabLayout homeTabLayout = findViewById(R.id.home_tab_layout);
         ViewPager2 homeViewPager = findViewById(R.id.home_view_pager);
@@ -62,6 +84,14 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.navigation_view);
+
+        View header= navigationView.getHeaderView(0);
+        mUsername =header.findViewById(R.id.username);
+        if(userUID!=null){
+        setUsername(userUID);
+        setprofilepic(userUID);
+        }
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -72,10 +102,36 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.bookmarks:
                         startActivity(new Intent(MainActivity.this, BookmarksActivity.class));
                         return true;
+                    case R.id.logout:
+                        auth.signOut();
+                        startActivity(new Intent(MainActivity.this,StartActivity.class));
+                        finish();
+                        Toast.makeText(MainActivity.this, "signed out", Toast.LENGTH_SHORT).show();
+                        return true;
                 }
                 return true;
             }
         });
+    }
+
+    private void setprofilepic(String userUID) {
+
+    }
+
+    private void setUsername(String userUID) {
+        ref.child("users").child(userUID).child("username").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String username=snapshot.getValue(String.class);
+                mUsername.setText(username);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     @Override

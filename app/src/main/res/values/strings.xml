@@ -2,4 +2,16 @@
     <string name="app_name">GameBox</string>
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Open</string>
+    <string name="etrEmail">Enter Email</string>
+    <string name="etrPassword">Enter Password</string>
+    <string name="signin">Sign in</string>
+    <string name="signup">sign up</string>
+    <string name="forgot_pass">Forgot Password</string>
+    <string name="no_account">Don\'t have an account? Sign up</string>
+    <string name="have_account">Already have account? Sign in</string>
+    <string name="signing_in">signing in</string>
+    <string name="signing_out">signing out</string>
+    <string name="creating_acc">creating account</string>
+    <string name="signed_in">signed in</string>
+    <string name="pleaseEtr">enter correct Email and password</string>
 </resources>

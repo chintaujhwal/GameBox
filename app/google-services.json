@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "936104894241",
+    "project_id": "gamebox-264fa",
+    "storage_bucket": "gamebox-264fa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936104894241:android:406d5e25bc1e7b96322860",
+        "android_client_info": {
+          "package_name": "com.example.gamebox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "936104894241-q6i580gvsoaq8j93833ak5pnqp14bo0c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1_eIBewpfTte2piO1hcRobCx8VXrDllY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "936104894241-q6i580gvsoaq8j93833ak5pnqp14bo0c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
