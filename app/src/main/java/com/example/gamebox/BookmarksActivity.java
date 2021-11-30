@@ -10,12 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -29,9 +26,7 @@ public class BookmarksActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ArrayList<Game> gamesList = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
-            gamesList.add(new Game(R.drawable.pubg));
-        }
+
 
         GridView gridView = findViewById(R.id.bookmarksGridView);
         BookmarksAdapter adapter = new BookmarksAdapter(BookmarksActivity.this, gamesList);
@@ -62,7 +57,7 @@ class BookmarksAdapter extends ArrayAdapter<Game> {
         Game currentGame = getItem(position);
 
         ImageView poster = convertView.findViewById(R.id.game_card);
-        poster.setImageResource(currentGame.getPoster());
+        Picasso.get().load(currentGame.getImageUrl()).fit().into(poster);
 
         return convertView;
     }

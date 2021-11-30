@@ -1,16 +1,22 @@
 package com.example.gamebox;
 
-public class Game {
-    private final int Poster;
-    private  String title;
-    private int year;
-    private String
+import android.net.Uri;
 
-    Game(int Poster) {
-        this.Poster = Poster;
+public class Game {
+    private final String image;
+    private String parent;
+
+    Game(String Poster,String parent) {
+        this.image = Poster;
+        this.parent=parent;
     }
 
-    public int getPoster() {
-        return Poster;
+    public Uri getImageUrl() {
+        Uri uri=Uri.parse(image);
+        return uri;
+    }
+
+    public String getParent() {
+        return parent;
     }
 }

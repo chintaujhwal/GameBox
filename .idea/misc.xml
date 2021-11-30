@@ -84,7 +84,6 @@
         <entry key="..\:/Work/AndroidStudioProjects/GameBox/app/src/main/res/layout/rating_stars.xml" value="0.25" />
         <entry key="..\:/Work/AndroidStudioProjects/GameBox/app/src/main/res/layout/ratingbar_icon_selector.xml" value="0.25" />
         <entry key="..\:/Work/AndroidStudioProjects/GameBox/app/src/main/res/layout/review_card.xml" value="0.25" />
-        <entry key="..\:/Work/AndroidStudioProjects/GameBox/app/src/main/res/layout/search_item.xml" value="0.25" />
         <entry key="..\:/Work/AndroidStudioProjects/GameBox/app/src/main/res/layout/toolbar_custom.xml" value="0.25" />
         <entry key="..\:/Work/AndroidStudioProjects/GameBox/app/src/main/res/layout/toolbar_home.xml" value="0.25" />
         <entry key="..\:/Work/AndroidStudioProjects/GameBox/app/src/main/res/layout/toolbar_search.xml" value="0.25" />
@@ -115,6 +114,7 @@
         <entry key="app/src/main/res/drawable/visibility_on1.xml" value="0.5203125" />
         <entry key="app/src/main/res/layout/activity_bookmarks.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.28802083333333334" />
+        <entry key="app/src/main/res/layout/activity_game.xml" value="0.41025641025641024" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="app/src/main/res/layout/activity_rating.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.5" />
