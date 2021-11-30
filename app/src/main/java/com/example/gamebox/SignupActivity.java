@@ -24,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthResult;
@@ -32,6 +33,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -181,7 +183,21 @@ Log.v("email",String.valueOf(!txt_email.matches(emailPattern)));
         String userUID= auth.getCurrentUser().getUid();
         ref.child(userUID).child("username").setValue(txt_username);
         StorageReference imageRef =mstorageRef.child(userUID+".jpg");
-        imageRef.putFile(profilepicURI);
+        imageRef.putFile(profilepicURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        String downloadUri=uri.toString();
+                        ref.child(userUID).child("profilePic").setValue(downloadUri);
+
+                    }
+                });
+            }
+        });
+
+
     }
 
     private String getFileExtension(Uri profilepicURI) {
