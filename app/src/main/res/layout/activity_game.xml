@@ -127,6 +127,7 @@
                 </LinearLayout>
 
                 <include
+                    android:id="@+id/game_rating"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:layout_marginTop="16dp"
@@ -151,7 +152,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tag_state_description"
+            android:id="@+id/game_description"
             style="@style/content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -223,6 +224,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/all_reviews"
             android:layout_gravity="center"
             style="@style/title_1"
             android:textSize="16dp"

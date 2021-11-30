@@ -1,11 +1,13 @@
 package com.example.gamebox;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -14,46 +16,13 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
 
 public class GameActivity extends AppCompatActivity {
 
-    private DatabaseReference reference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
-        HashMap<String,Object> hashMap= new HashMap<>();
-        Bundle bundle = getIntent().getExtras();
-        String parent=bundle.getString("parent");
-        reference= FirebaseDatabase.getInstance().getReference();
-        DatabaseReference gamadata=reference.child("games").child(parent);
-
-        gamadata.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snapshot1 : snapshot.getChildren()){
-                    hashMap.put(snapshot1.getKey(),snapshot1.getValue());
-                    Log.i(snapshot1.getKey(), snapshot1.getValue().toString());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
-
-
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -89,12 +58,49 @@ public class GameActivity extends AppCompatActivity {
                 gameTabLayout.selectTab(gameTabLayout.getTabAt(position));
             }
         });
+
+//        Like, Rate and Bookmark
+
+        LinearLayout like = findViewById(R.id.like);
+        like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageView favoriteIcon = (ImageView) like.getChildAt(0);
+                if (favoriteIcon.getColorFilter() == null)
+                    favoriteIcon.setColorFilter(getResources().getColor(R.color.orange));
+                else
+                    favoriteIcon.setColorFilter(null);
+            }
+        });
+
+        LinearLayout rate = findViewById(R.id.rate);
+        rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GameActivity.this, RatingActivity.class));
+            }
+        });
+
+        ImageView bookmark = findViewById(R.id.bookmark);
+        bookmark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bookmark.getColorFilter() == null) {
+                    bookmark.setColorFilter(getResources().getColor(R.color.orange));
+                    Toast.makeText(GameActivity.this, "Bookmarked", Toast.LENGTH_SHORT).show();
+                } else {
+                    bookmark.setColorFilter(null);
+                    Toast.makeText(GameActivity.this, "Bookmark Removed", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            default: finish();
+            default:
+                finish();
         }
         return super.onOptionsItemSelected(item);
     }

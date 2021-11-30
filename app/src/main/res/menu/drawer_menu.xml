@@ -36,6 +36,7 @@
             android:title="Settings" />
         <item
             android:id="@+id/logout"
+            android:icon="@drawable/meeting_room_24"
             android:title="Logout"/>
     </group>
 

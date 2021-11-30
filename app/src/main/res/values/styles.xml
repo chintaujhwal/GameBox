@@ -33,4 +33,12 @@
         <item name="android:textSize">16dp</item>
     </style>
 
+
+    <style name="CustomRatingBarStyle" parent="Widget.AppCompat.RatingBar">
+        <item name="android:progressDrawable">@drawable/ratingbar_selector</item>
+        <item name="android:minHeight">18dp</item>
+        <item name="android:numStars">5</item>
+        <item name="android:max">5</item>
+    </style>
+
 </resources>
