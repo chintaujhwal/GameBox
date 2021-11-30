@@ -115,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setprofilepic(String userUID) {
-
     }
 
     private void setUsername(String userUID) {
