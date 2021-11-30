@@ -24,7 +24,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class GamesFragment extends Fragment {
-private DatabaseReference reference;
+    private DatabaseReference reference;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_games, container, false);
@@ -104,8 +104,9 @@ class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.MyViewHolder> {
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(view.getContext(), GameActivity.class);
-                intent.putExtra("Parent",currentGame.getParent());
-                intent.putExtra("imageUrl",currentGame.getImageUrl().toString());
+                Bundle bundle= new Bundle();
+                bundle.putString("parent",currentGame.getParent());
+                intent.putExtras(bundle);
                 view.getContext().startActivity(intent);
             }
         });
@@ -130,5 +131,3 @@ class SpacingItemDecorator extends RecyclerView.ItemDecoration {
         outRect.right = spacing;
     }
 }
-
-

@@ -1,9 +1,11 @@
 package com.example.gamebox;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -12,13 +14,46 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 public class GameActivity extends AppCompatActivity {
 
+    private DatabaseReference reference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        HashMap<String,Object> hashMap= new HashMap<>();
+        Bundle bundle = getIntent().getExtras();
+        String parent=bundle.getString("parent");
+        reference= FirebaseDatabase.getInstance().getReference();
+        DatabaseReference gamadata=reference.child("games").child(parent);
+
+        gamadata.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snapshot1 : snapshot.getChildren()){
+                    hashMap.put(snapshot1.getKey(),snapshot1.getValue());
+                    Log.i(snapshot1.getKey(), snapshot1.getValue().toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

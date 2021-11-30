@@ -5,7 +5,7 @@ import android.net.Uri;
 public class GameData {
     private String posterUrl,imageUrl,title,genre,overview,platforms,developers,publishers,os,processors,memory,graphics,direct_X,storage,levels;
     private int year,rating;
-public void Gamedata (String posterUrl,String imageUrl,String title,String genre,String overview,String platforms,String developers,String publishers,String os,String processors,String memory,String graphics,String direct_X,String storage,String levels,int year,int rating){
+    public void Gamedata (String posterUrl, String imageUrl, String title, String genre, String overview, String platforms, String developers, String publishers, String os, String processors, String memory, String graphics, String direct_X, String storage, String levels, int year, int rating){
 this.posterUrl= posterUrl;
 this.imageUrl=imageUrl;
 this.title=title;
