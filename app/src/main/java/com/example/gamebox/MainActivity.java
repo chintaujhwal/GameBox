@@ -1,10 +1,13 @@
 package com.example.gamebox;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +22,8 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,24 +32,32 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
-    private FirebaseDatabase db;
-    private DatabaseReference ref;
+    private FirebaseDatabase firebaseDatabase;
+    private StorageReference mstorageRef;
+    private DatabaseReference reference;
     private String userUID;
 
     private TextView mUsername;
+    private ImageView mProfilPic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
         auth=FirebaseAuth.getInstance();
-        db=FirebaseDatabase.getInstance();
-        ref=db.getReference();
-
+        firebaseDatabase =FirebaseDatabase.getInstance();
+        mstorageRef= FirebaseStorage.getInstance().getReference();
+        reference = firebaseDatabase.getReference();
         userUID=auth.getCurrentUser().getUid();
 
         TabLayout homeTabLayout = findViewById(R.id.home_tab_layout);
@@ -87,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
 
         View header= navigationView.getHeaderView(0);
         mUsername =header.findViewById(R.id.username);
+        mProfilPic=header.findViewById(R.id.profilePic_main);
+
         if(userUID!=null){
         setUsername(userUID);
         setprofilepic(userUID);
@@ -115,10 +130,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setprofilepic(String userUID) {
+        mstorageRef.child("UserProfilePic").child(userUID+".jpg");
+        try {
+            File localfile=File.createTempFile(userUID,"jpg");
+            mstorageRef.getFile(localfile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    Bitmap bitmap = BitmapFactory.decodeFile(localfile.getAbsolutePath());
+              mProfilPic.setImageBitmap(bitmap);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+               mProfilPic.setImageDrawable(getDrawable(R.drawable.profile_pic_placeholder));
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setUsername(String userUID) {
-        ref.child("users").child(userUID).child("username").addValueEventListener(new ValueEventListener() {
+        reference.child("users").child(userUID).child("username").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String username=snapshot.getValue(String.class);
