@@ -7,4 +7,39 @@
     android:orientation="vertical"
     tools:context=".RatingActivity">
 
+    <include layout="@layout/search_item" />
+
+    <View style="@style/line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space"
+        android:gravity="center_vertical">
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="0.0"
+            android:textColor="@color/white"
+            android:textSize="34dp" />
+    </RelativeLayout>
+
+    <View style="@style/line" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space"
+        android:background="@android:color/transparent"
+        android:hint="Write your review"
+        android:textSize="16dp"/>
+
 </LinearLayout>
