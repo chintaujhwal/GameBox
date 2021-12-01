@@ -7,14 +7,9 @@
     android:orientation="vertical"
     tools:context=".RatingActivity">
 
-<!--<<<<<<< HEAD-->
-    <include android:id="@+id/Ratinggame"
-        layout="@layout/search_item"
-         />
-=======
-<!--    <include-->
-<!--        layout="@layout/search_item" />-->
->>>>>>> master
+    <include
+        android:id="@+id/Ratinggame"
+        layout="@layout/search_item" />
 
     <View style="@style/line" />
 
