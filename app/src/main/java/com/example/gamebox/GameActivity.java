@@ -48,9 +48,9 @@ public class GameActivity extends AppCompatActivity {
 
 
         Bundle bundle = getIntent().getExtras();
-        String title = bundle.getString("parent");
+        String parent = bundle.getString("parent");
 
-        Log.i("parent", "onCreate: "+title);
+        Log.i("parent", "onCreate: "+parent);
 
 //        Map<String,Object> gamemap=new HashMap<String,Object>();
 //        ArrayMap<String,Object> gamemap=new ArrayMap<String,Object>();\
@@ -58,7 +58,7 @@ public class GameActivity extends AppCompatActivity {
 
         reference= FirebaseDatabase.getInstance().getReference();
 
-        DatabaseReference gameData=reference.child("games").child(title);
+        DatabaseReference gameData=reference.child("games").child(parent);
 
         gameData.addValueEventListener(new ValueEventListener() {
             @Override
@@ -84,7 +84,7 @@ public class GameActivity extends AppCompatActivity {
 
 
         Bundle fragBundle = new Bundle();
-        fragBundle.putString("parent",title);
+        fragBundle.putString("parent",parent);
 
 
 
@@ -136,7 +136,11 @@ public class GameActivity extends AppCompatActivity {
         rate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(GameActivity.this, RatingActivity.class));
+                Intent intent=new Intent(GameActivity.this, RatingActivity.class);
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("parent",parent);
+                intent.putExtras(bundle1);
+                startActivity(intent);
             }
         });
 

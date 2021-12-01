@@ -7,7 +7,9 @@
     android:orientation="vertical"
     tools:context=".RatingActivity">
 
-    <include layout="@layout/search_item" />
+    <include android:id="@+id/Ratinggame"
+        layout="@layout/search_item"
+         />
 
     <View style="@style/line" />
 
@@ -37,6 +39,7 @@
     <View style="@style/line" />
 
     <EditText
+        android:id="@+id/reviewEdittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/space"
