@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                         auth.signOut();
                         startActivity(new Intent(MainActivity.this,StartActivity.class));
                         finish();
-                        Toast.makeText(MainActivity.this, "signed out", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Good Bye", Toast.LENGTH_SHORT).show();
                         return true;
                 }
                 return true;
@@ -167,7 +167,6 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.search_item:
                 startActivity(new Intent(this, SearchActivity.class));
-                return true;
         }
         return super.onOptionsItemSelected(item);
     }

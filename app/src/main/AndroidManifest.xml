@@ -30,7 +30,8 @@
             android:exported="true" />
         <activity
             android:name=".RatingActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="You Played"/>
         <activity
             android:name=".BookmarksActivity"
             android:exported="true"
