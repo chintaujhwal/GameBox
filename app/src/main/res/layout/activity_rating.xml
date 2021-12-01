@@ -13,7 +13,6 @@
          />
 =======
     <include
-        android:id="@+id/game"
         layout="@layout/search_item" />
 >>>>>>> master
 
