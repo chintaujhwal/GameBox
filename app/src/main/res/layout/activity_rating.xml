@@ -8,7 +8,6 @@
     tools:context=".RatingActivity">
 
     <include
-        android:id="@+id/game"
         layout="@layout/search_item" />
 
     <View style="@style/line" />
