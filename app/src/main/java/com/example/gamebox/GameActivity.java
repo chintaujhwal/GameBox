@@ -2,12 +2,16 @@ package com.example.gamebox;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -16,24 +20,77 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class GameActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        DatabaseReference reference;
+        ImageView game_poster = findViewById(R.id.game_poster);
+        ImageView game_hero=findViewById(R.id.game_hero);
+        TextView game_title=findViewById(R.id.game_title);
+        TextView game_genre=findViewById(R.id.game_genre);
+        TextView games_description=findViewById(R.id.game_description);
+        TextView game_year=findViewById(R.id.game_year);
+        View game_rating= findViewById(R.id.game_rating);
+        RatingBar ratingBar =game_rating.findViewById(R.id.game_ratingbar);
+        TextView rating_textview=game_rating.findViewById(R.id.rating_textview);
 
-        ImageView gamePoster = findViewById(R.id.game_poster);
 
-        if (gamePoster.getDrawable() == null)
-            gamePoster.setImageResource(R.drawable.image_placeholder);
+        Bundle bundle = getIntent().getExtras();
+        String title = bundle.getString("parent");
+
+        Log.i("parent", "onCreate: "+title);
+
+//        Map<String,Object> gamemap=new HashMap<String,Object>();
+//        ArrayMap<String,Object> gamemap=new ArrayMap<String,Object>();\
+
+
+        reference= FirebaseDatabase.getInstance().getReference();
+
+        DatabaseReference gameData=reference.child("games").child(title);
+
+        gameData.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                GameData gameData1 = snapshot.getValue(GameData.class);
+                Picasso.get().load(gameData1.getImageUrl()).into(game_poster);
+                Picasso.get().load(gameData1.getPosterUrl()).fit().into(game_hero);
+                game_title.setText(gameData1.getTitle());
+                game_genre.setText(gameData1.getGenre());
+                game_year.setText(gameData1.getYear());
+                games_description.setText(gameData1.getOverview());
+                ratingBar.setRating(Float.parseFloat(gameData1.getRating()));
+                rating_textview.setText(gameData1.getRating());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+        Bundle fragBundle = new Bundle();
+        fragBundle.putString("parent",title);
+
+
 
         TabLayout gameTabLayout = findViewById(R.id.game_tab_layout);
         ViewPager2 gameViewPager = findViewById(R.id.game_viewpager);
-        gameViewPager.setAdapter(new GameFragmentAdapter(getSupportFragmentManager(), getLifecycle()));
+        gameViewPager.setAdapter(new GameFragmentAdapter(getSupportFragmentManager(), getLifecycle(),fragBundle));
 
         gameTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -58,6 +115,8 @@ public class GameActivity extends AppCompatActivity {
                 gameTabLayout.selectTab(gameTabLayout.getTabAt(position));
             }
         });
+
+
 
 //        Like, Rate and Bookmark
 
@@ -107,20 +166,30 @@ public class GameActivity extends AppCompatActivity {
 }
 
 class GameFragmentAdapter extends FragmentStateAdapter {
-
-    public GameFragmentAdapter(FragmentManager fragmentManager, Lifecycle lifecycle) {
+private Bundle bundle;
+    public GameFragmentAdapter(FragmentManager fragmentManager, Lifecycle lifecycle,Bundle bundle) {
         super(fragmentManager, lifecycle);
+        this.bundle=bundle;
     }
 
     @Override
     public Fragment createFragment(int position) {
         switch (position) {
             case 1:
-                return new GameRequirementsFragment();
+                GameRequirementsFragment obj0= new GameRequirementsFragment();
+                obj0.setArguments(bundle);
+                return obj0;
+
+
             case 2:
-                return new GameLevelsFragment();
+                GameLevelsFragment obj2=new GameLevelsFragment();
+                 obj2.setArguments(bundle);
+                return obj2;
         }
-        return new GameDetailsFragment();
+        GameDetailsFragment obj1=new GameDetailsFragment();
+        obj1.setArguments(bundle);
+        return obj1;
+//return new GameDetailsFragment();
     }
 
     @Override

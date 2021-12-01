@@ -1,12 +1,14 @@
 package com.example.gamebox;
 
-import android.net.Uri;
-
 public class GameData {
-    private String posterUrl,imageUrl,title,genre,overview,platforms,developers,publishers,os,processors,memory,graphics,direct_X,storage,levels;
+    private String d,posterUrl,imageUrl,title,genre,overview,platforms,developers,publishers, OS, Processor, Memory, Graphics, Direct_X, Storage,levels;
     private int year,rating;
-    public void Gamedata (String posterUrl, String imageUrl, String title, String genre, String overview, String platforms, String developers, String publishers, String os, String processors, String memory, String graphics, String direct_X, String storage, String levels, int year, int rating){
+
+
+
+    public void Gamedata (String posterUrl, String imageUrl, String title, String genre, String overview, String platforms, String developers, String publishers, String graphics,String os, String processors, String memory, String direct_X, String storage, String levels, int year, int rating){
 this.posterUrl= posterUrl;
+this.Graphics =graphics;
 this.imageUrl=imageUrl;
 this.title=title;
 this.genre=genre;
@@ -14,11 +16,11 @@ this.overview=overview;
 this.platforms=platforms;
 this.developers=developers;
 this.publishers=publishers;
-this.os=os;
-this.processors=processors;
-this.memory=memory;
-this.storage=storage;
-this.direct_X=direct_X;
+this.OS =os;
+this.Processor =processors;
+this.Memory =memory;
+this.Storage =storage;
+this.Direct_X =direct_X;
 this.levels=levels;
 this.year=year;
 this.rating=rating;
@@ -32,45 +34,47 @@ this.rating=rating;
         return levels;
     }
 
-    public int getYear() {
+    public String getYear() {
+        String year = Integer.toString(this.year);
         return year;
     }
 
-    public int getRating() {
-        return rating;
+    public String getRating() {
+        String year = Integer.toString(this.rating);
+        return year;
     }
 
     public String getStorage() {
-        return storage;
+        return Storage;
     }
 
     public String getGraphics() {
-        return graphics;
+        return Graphics;
     }
 
     public String getDirect_X() {
-        return direct_X;
+        return Direct_X;
     }
 
     public String getMemory() {
-        return memory;
+        return Memory;
     }
 
-    public String getProcessors() {
-        return processors;
+    public String getProcessor() {
+        return Processor;
     }
 
-    public String getOs() {
-        return os;
+    public String getOS() {
+        return OS;
     }
 
     public String getPublishers() {
         return publishers;
     }
 
-    public Uri getPosterUrl() {
-    Uri Uri= android.net.Uri.parse(posterUrl);
-    return Uri;
+
+    public String getPosterUrl() {
+        return posterUrl;
     }
 
     public String getPlatforms() {
@@ -85,12 +89,21 @@ this.rating=rating;
         return genre;
     }
 
-    public Uri getImageUrl() {
-        Uri Uri= android.net.Uri.parse(imageUrl);
-        return Uri;
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public String getTitle() {
         return title;
     }
 }
+//    public Uri getPosterUrl() {
+//    Uri Uri= android.net.Uri.parse(posterUrl);
+//    return Uri;
+//    }
+//    public Uri getImageUrl() {
+//        Uri Uri= android.net.Uri.parse(imageUrl);
+//        return Uri;
+//    }
+

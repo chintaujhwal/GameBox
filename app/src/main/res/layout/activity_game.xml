@@ -17,6 +17,7 @@
             android:layout_height="@dimen/news_card_image_height">
 
             <ImageView
+                android:id="@+id/game_hero"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
