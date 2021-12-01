@@ -15,7 +15,8 @@
         android:theme="@style/Theme.GameBox">
         <activity
             android:name=".ReviewsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="All Reviews"/>
         <activity
             android:name=".ForgotPasswordActivity"
             android:exported="true"

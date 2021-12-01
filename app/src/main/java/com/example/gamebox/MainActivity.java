@@ -129,8 +129,10 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Userdetails obj =snapshot.getValue(Userdetails.class);
                String download= obj.getProfilePic();
-                Picasso.get().load(download).into(mProfilPic);
-
+               if(download == null)
+                    Picasso.get().load(download).into(mProfilPic);
+               else
+                   mProfilPic.setImageDrawable(getDrawable(R.drawable.profile_pic_placeholder));
             }
 
             @Override

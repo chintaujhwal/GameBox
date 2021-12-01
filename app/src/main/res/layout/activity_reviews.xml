@@ -4,11 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReviewsActivity">
+    tools:context=".ReviewsActivity"
+    android:padding="@dimen/space"
+    android:clipToPadding="false">
 
     <ListView
         android:id="@+id/reviews"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:divider="@null"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
         android:layout_width="40dp"
@@ -36,6 +36,7 @@
             android:text="Emma Stone" />
 
         <include
+            android:id="@+id/rating_area"
             layout="@layout/rating_stars"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,6 +53,7 @@
         android:layout_toRightOf="@id/review_card_view"
         android:ellipsize="end"
         android:maxLines="4"
+        android:layout_marginBottom="@dimen/space"
         android:text="There were a few things I like about this game, although it fades compared to the fantastic experience I had with the first new tomb raider from 2014." />
 
 </RelativeLayout>

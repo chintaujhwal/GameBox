@@ -43,8 +43,8 @@ public class GameActivity extends AppCompatActivity {
         TextView games_description=findViewById(R.id.game_description);
         TextView game_year=findViewById(R.id.game_year);
         View game_rating= findViewById(R.id.game_rating);
-        RatingBar ratingBar =game_rating.findViewById(R.id.game_ratingbar);
-        TextView rating_textview=game_rating.findViewById(R.id.rating_textview);
+        RatingBar ratingBar =game_rating.findViewById(R.id.rating_bar);
+        TextView rating_textview=game_rating.findViewById(R.id.rating_value);
 
 
         Bundle bundle = getIntent().getExtras();
@@ -155,6 +155,14 @@ public class GameActivity extends AppCompatActivity {
                     bookmark.setColorFilter(null);
                     Toast.makeText(GameActivity.this, "Bookmark Removed", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        TextView allReviews = findViewById(R.id.all_reviews);
+        allReviews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GameActivity.this, ReviewsActivity.class));
             }
         });
     }
