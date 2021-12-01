@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -36,6 +37,14 @@ public class ReviewsActivity extends AppCompatActivity {
         ReviewAdapter adapter = new ReviewAdapter(ReviewsActivity.this, list);
         ListView listView = findViewById(R.id.reviews);
         listView.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            default: finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 
