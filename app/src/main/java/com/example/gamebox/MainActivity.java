@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(userUID!=null){
         setUsername(userUID);
-        setprofilepic(userUID);
+//        setprofilepic(userUID);
         }
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
