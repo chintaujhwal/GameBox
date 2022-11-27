@@ -56,8 +56,8 @@ public class SignupActivity extends AppCompatActivity {
 
         auth=FirebaseAuth.getInstance();
         db=FirebaseDatabase.getInstance();
-       ref= db.getReference("users");
-       mstorageRef= FirebaseStorage.getInstance().getReference("UserProfilePic");
+        ref= db.getReference("users");
+        mstorageRef= FirebaseStorage.getInstance().getReference("UserProfilePic");
         mEmail=findViewById(R.id.signup_email);
         mUsername=findViewById(R.id.signup_username);
         mPass=findViewById(R.id.signup_pass);
@@ -91,7 +91,7 @@ public class SignupActivity extends AppCompatActivity {
                 txt_username=mUsername.getText().toString();
                 txt_pass=mPass.getText().toString();
                 txt_confirmpass=mConfirmPass.getText().toString();
-Log.v("email",String.valueOf(!txt_email.matches(emailPattern)));
+                Log.v("email",String.valueOf(!txt_email.matches(emailPattern)));
                 if(!txt_email.matches(emailPattern) || txt_email.isEmpty()){
                     mEmail.setError("invalid email");
                     return;
@@ -116,7 +116,7 @@ Log.v("email",String.valueOf(!txt_email.matches(emailPattern)));
                     progress.show();
                     progress.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                     progress.setContentView(R.layout.progress_layout);
-                    createuser(txt_email,txt_pass,txt_username, imageURI);
+                    createuser(txt_email, txt_pass, txt_username, imageURI);
 
                 }
             }
@@ -148,8 +148,8 @@ Log.v("email",String.valueOf(!txt_email.matches(emailPattern)));
     }
 
 
-    private void createuser(String txt_email, String txt_pass,String txt_username,Uri profilepicURI) {
-        auth.createUserWithEmailAndPassword(txt_email,txt_pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+    private void createuser(String txt_email, String txt_pass, String txt_username, Uri profilepicURI) {
+        auth.createUserWithEmailAndPassword(txt_email, txt_pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(!task.isSuccessful()){
@@ -160,13 +160,13 @@ Log.v("email",String.valueOf(!txt_email.matches(emailPattern)));
                 }
                 else {
                     if(profilepicURI!=null){
-                        uploaduserdata(txt_username,profilepicURI);
+                        uploaduserdata(txt_email, txt_username, profilepicURI);
                     }
                     else {
-                        uploaduserdata(txt_username);
+                        uploaduserdata(txt_email, txt_username);
                     }
-                    Toast.makeText(SignupActivity.this,"signed up",Toast.LENGTH_SHORT);
-                    startActivity(new Intent(SignupActivity.this,MainActivity.class));
+                    Toast.makeText(SignupActivity.this,"signed up", Toast.LENGTH_SHORT);
+                    startActivity(new Intent(SignupActivity.this, MainActivity.class));
                     finish();
                 }
             }
@@ -174,14 +174,18 @@ Log.v("email",String.valueOf(!txt_email.matches(emailPattern)));
 
     }
 
-    private void uploaduserdata(String txt_username) {
+    private void uploaduserdata(String txt_email, String txt_username) {
         String userUID= auth.getCurrentUser().getUid();
         ref.child(userUID).child("username").setValue(txt_username);
+        ref.child(userUID).child("email").setValue(txt_email);
+        ref.child(userUID).child("profilePic").setValue("https://firebasestorage.googleapis.com/v0/b/gamebox-264fa.appspot.com/o/UserProfilePic%2Fprofilebg.png?alt=media&token=3558a63e-0318-4abc-9505-d552e582edf8");
+
     }
 
-    private void uploaduserdata(String txt_username, Uri profilepicURI) {
+    private void uploaduserdata(String txt_email, String txt_username, Uri profilepicURI) {
         String userUID= auth.getCurrentUser().getUid();
         ref.child(userUID).child("username").setValue(txt_username);
+        ref.child(userUID).child("email").setValue(txt_email);
         StorageReference imageRef =mstorageRef.child(userUID+".jpg");
         imageRef.putFile(profilepicURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override

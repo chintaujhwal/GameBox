@@ -19,12 +19,31 @@
 
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:layout_marginLeft="16dp"
-        style="@style/title_1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/username"
-        android:textSize="18sp"/>
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginLeft="16dp"
+            style="@style/title_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/username"
+            android:text="Chinta Ujhwal"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:layout_marginLeft="16dp"
+            style="@style/title_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/email"
+            android:text="chinta.ujhwal.19cse@bmu.edu.in"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
 
 </LinearLayout>

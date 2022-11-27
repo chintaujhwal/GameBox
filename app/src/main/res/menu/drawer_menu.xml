@@ -31,10 +31,6 @@
             android:title="Reviews" />
 
         <item
-            android:id="@+id/settings"
-            android:icon="@drawable/settings_suggest_24dp"
-            android:title="Settings" />
-        <item
             android:id="@+id/logout"
             android:icon="@drawable/meeting_room_24"
             android:title="Logout"/>

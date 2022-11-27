@@ -1,5 +1,7 @@
 package com.example.gamebox;
 
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -34,6 +36,13 @@ import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static String USERNAME = "Username";
+    public static String EMAIL = "Email";
+    public static String IMAGE = "Image";
+
+    ProgressDialog pd;
+
+
     private FirebaseAuth auth;
     private FirebaseDatabase firebaseDatabase;
     private StorageReference mstorageRef;
@@ -41,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private String userUID;
 
     private TextView mUsername;
+    private TextView mUseremail;
     private ImageView mProfilPic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,17 +103,21 @@ public class MainActivity extends AppCompatActivity {
 
         View header= navigationView.getHeaderView(0);
         mUsername =header.findViewById(R.id.username);
+        mUseremail = header.findViewById(R.id.email);
         mProfilPic=header.findViewById(R.id.profilePic_main);
 
         if(userUID!=null){
-        setUsername(userUID);
-//        setprofilepic(userUID);
+            setUser(userUID);
+//            setprofilepic(userUID);
         }
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
+                    case R.id.profile:
+                        startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                        return true;
                     case R.id.search:
                         startActivity(new Intent(MainActivity.this, SearchActivity.class));
                         return true;
@@ -122,32 +136,39 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setprofilepic(String userUID) {
+//    private void setprofilepic(String userUID) {
+//
+//        reference.child("users").child(userUID).addValueEventListener(new ValueEventListener() {
+//            @SuppressLint("UseCompatLoadingForDrawables")
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                Userdetails obj = snapshot.getValue(Userdetails.class);
+//                assert obj != null;
+//                String download= obj.getProfilePic();
+//                if(download == null)
+//                     Picasso.get().load(download).into(mProfilPic);
+//                else
+//                    mProfilPic.setImageDrawable(getDrawable(R.drawable.profile_pic_placeholder));
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast.makeText(MainActivity.this,""+error,Toast.LENGTH_LONG).show();
+//            }
+//        });
+//    }
 
+    private void setUser(String userUID) {
         reference.child("users").child(userUID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Userdetails obj =snapshot.getValue(Userdetails.class);
-               String download= obj.getProfilePic();
-               if(download == null)
-                    Picasso.get().load(download).into(mProfilPic);
-               else
-                   mProfilPic.setImageDrawable(getDrawable(R.drawable.profile_pic_placeholder));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MainActivity.this,""+error,Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    private void setUsername(String userUID) {
-        reference.child("users").child(userUID).child("username").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String username=snapshot.getValue(String.class);
+                Userdetails obj = snapshot.getValue(Userdetails.class);
+                assert obj != null;
+                Picasso.get().load(obj.getProfilePic()).placeholder(R.drawable.profile_24).into(mProfilPic);
+                String username= obj.getUsername();
                 mUsername.setText(username);
+                String email = obj.getEmail();
+                mUseremail.setText(email);
             }
 
             @Override
@@ -155,7 +176,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
     @Override
