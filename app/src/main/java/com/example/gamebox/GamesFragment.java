@@ -24,7 +24,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class GamesFragment extends Fragment {
-    private DatabaseReference reference;
+        private DatabaseReference reference;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_games, container, false);
@@ -54,11 +54,6 @@ public class GamesFragment extends Fragment {
 
             }
         });
-
-
-
-
-
 
         RecyclerView recyclerView = rootView.findViewById(R.id.gamesRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));

@@ -1,7 +1,5 @@
 package com.example.gamebox;
 
-import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -30,28 +28,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String USERNAME = "Username";
-    public static String EMAIL = "Email";
-    public static String IMAGE = "Image";
-
-    ProgressDialog pd;
-
-
     private FirebaseAuth auth;
     private FirebaseDatabase firebaseDatabase;
-    private StorageReference mstorageRef;
     private DatabaseReference reference;
     private String userUID;
 
     private TextView mUsername;
     private TextView mUseremail;
     private ImageView mProfilPic;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         
         auth=FirebaseAuth.getInstance();
         firebaseDatabase =FirebaseDatabase.getInstance();
-        mstorageRef= FirebaseStorage.getInstance().getReference();
         reference = firebaseDatabase.getReference();
         userUID=auth.getCurrentUser().getUid();
 
@@ -108,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
 
         if(userUID!=null){
             setUser(userUID);
-//            setprofilepic(userUID);
         }
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -135,28 +122,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-//    private void setprofilepic(String userUID) {
-//
-//        reference.child("users").child(userUID).addValueEventListener(new ValueEventListener() {
-//            @SuppressLint("UseCompatLoadingForDrawables")
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Userdetails obj = snapshot.getValue(Userdetails.class);
-//                assert obj != null;
-//                String download= obj.getProfilePic();
-//                if(download == null)
-//                     Picasso.get().load(download).into(mProfilPic);
-//                else
-//                    mProfilPic.setImageDrawable(getDrawable(R.drawable.profile_pic_placeholder));
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(MainActivity.this,""+error,Toast.LENGTH_LONG).show();
-//            }
-//        });
-//    }
 
     private void setUser(String userUID) {
         reference.child("users").child(userUID).addValueEventListener(new ValueEventListener() {

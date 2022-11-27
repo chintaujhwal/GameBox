@@ -20,6 +20,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,26 +30,39 @@ import com.squareup.picasso.Picasso;
 
 public class GameActivity extends AppCompatActivity {
 
+    private ImageView game_poster;
+    private ImageView game_hero;
+    private TextView game_title;
+    private TextView game_genre;
+    private TextView games_description;
+    private TextView game_year;
+    private View game_rating;
+    private RatingBar ratingBar;
+    private TextView rating_textview;
+    private ImageView bookmark;
+
+    private FirebaseAuth auth;
+    private DatabaseReference reference;
+    private String parent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        DatabaseReference reference;
-        ImageView game_poster = findViewById(R.id.game_poster);
-        ImageView game_hero=findViewById(R.id.game_hero);
-        TextView game_title=findViewById(R.id.game_title);
-        TextView game_genre=findViewById(R.id.game_genre);
-        TextView games_description=findViewById(R.id.game_description);
-        TextView game_year=findViewById(R.id.game_year);
-        View game_rating= findViewById(R.id.game_rating);
-        RatingBar ratingBar =game_rating.findViewById(R.id.rating_bar);
-        TextView rating_textview=game_rating.findViewById(R.id.rating_value);
+        game_poster = findViewById(R.id.game_poster);
+        game_hero=findViewById(R.id.game_hero);
+        game_title=findViewById(R.id.game_title);
+        game_genre=findViewById(R.id.game_genre);
+        games_description=findViewById(R.id.game_description);
+        game_year=findViewById(R.id.game_year);
+        game_rating= findViewById(R.id.game_rating);
+        ratingBar =game_rating.findViewById(R.id.rating_bar);
+        rating_textview=game_rating.findViewById(R.id.rating_value);
 
 
         Bundle bundle = getIntent().getExtras();
-        String parent = bundle.getString("parent");
+        parent = bundle.getString("parent");
 
         Log.i("parent", "onCreate: "+parent);
 
@@ -57,6 +71,7 @@ public class GameActivity extends AppCompatActivity {
 
 
         reference= FirebaseDatabase.getInstance().getReference();
+        auth = FirebaseAuth.getInstance();
 
         DatabaseReference gameData=reference.child("games").child(parent);
 
@@ -144,15 +159,30 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        ImageView bookmark = findViewById(R.id.bookmark);
+        bookmark = findViewById(R.id.bookmark);
+        setBookmark();
         bookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (bookmark.getColorFilter() == null) {
                     bookmark.setColorFilter(getResources().getColor(R.color.orange));
+                    DatabaseReference bookmarks = reference.child("users").child(auth.getCurrentUser().getUid()).child("bookmarks");
+                    gameData.child("imageUrl").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            bookmarks.child(parent).child("imageUrl").setValue(snapshot.getValue().toString());
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                     Toast.makeText(GameActivity.this, "Bookmarked", Toast.LENGTH_SHORT).show();
                 } else {
                     bookmark.setColorFilter(null);
+                    DatabaseReference bookmarks = reference.child("users").child(auth.getCurrentUser().getUid()).child("bookmarks");
+                    bookmarks.child(parent).removeValue();
                     Toast.makeText(GameActivity.this, "Bookmark Removed", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -166,6 +196,26 @@ public class GameActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void setBookmark() {
+        DatabaseReference bookmarks = reference.child("users").child(auth.getCurrentUser().getUid()).child("bookmarks");
+        bookmarks.child(parent).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    bookmark.setColorFilter(getResources().getColor(R.color.orange));
+                } else {
+                    bookmark.setColorFilter(null);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
