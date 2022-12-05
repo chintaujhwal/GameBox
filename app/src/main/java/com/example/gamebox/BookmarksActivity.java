@@ -1,12 +1,14 @@
 package com.example.gamebox;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -66,6 +68,19 @@ public class BookmarksActivity extends AppCompatActivity {
 
             }
         });
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Game game = gamesList.get(i);
+                Intent intent = new Intent(view.getContext(), GameActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("parent", game.getParent());
+                intent.putExtras(bundle);
+                view.getContext().startActivity(intent);
+            }
+        });
+
     }
 
     @Override
