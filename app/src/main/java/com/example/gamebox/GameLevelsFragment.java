@@ -35,7 +35,7 @@ public class GameLevelsFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 GameData gameData2 = snapshot.getValue(GameData.class);
 //                level.setText(gameData2.getLevels());
-                level.setText("Coastal Forest\n\nMountain Temple\n\nMountain Village\n\nBase Approach\n\nMountain Base\n\nBase Exterior\n\nCliffside Village\n\nMountain Pass\n\nChasm Monastery\n\nShanty Town");
+                level.setText("Coastal Forest\n\nMountain Temple\n\nMountain Village\n\nBase Approach\n\nMountain Base\n\nBase Exterior\n\nCliffside Village\n\nMountain Pass\n\nChasm Monastery\n\nShanty Town\n\nCavern Entrance\n\nGeothermal Caverns");
             }
 
             @Override
