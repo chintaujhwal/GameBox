@@ -9,6 +9,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -46,6 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
     private StorageReference storageRef;
     private Uri imageUri;
     private String myUri = "";
+    private String email = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +62,6 @@ public class ProfileActivity extends AppCompatActivity {
         profilePicture = (CircleImageView) findViewById(R.id.profile);
         edit_username = (EditText) findViewById(R.id.username);
         setUser(auth.getCurrentUser().getUid());
-        imageUri = Uri.parse(myUri);
         TextView changeProfile = (TextView) findViewById(R.id.change);
         changeProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,10 +102,11 @@ public class ProfileActivity extends AppCompatActivity {
                 Userdetails obj = snapshot.getValue(Userdetails.class);
                 assert obj != null;
                 myUri = obj.getProfilePic();
+                imageUri = Uri.parse(myUri);
                 Picasso.get().load(myUri).placeholder(R.drawable.profile_24).into(profilePicture);
                 String username= obj.getUsername();
                 edit_username.setText(username);
-                String email = obj.getEmail();
+                email = obj.getEmail();
             }
 
             @Override
@@ -122,6 +124,7 @@ public class ProfileActivity extends AppCompatActivity {
             HashMap<String, Object> map = new HashMap<>();
             map.put("profilePic", myUri);
             map.put("username", edit_username.getText().toString());
+            map.put("email", email);
             dataRef.child(auth.getCurrentUser().getUid()).updateChildren(map);
             Toast.makeText(ProfileActivity.this, "Profile Updated!!!", Toast.LENGTH_SHORT).show();
             setUser(auth.getCurrentUser().getUid());
@@ -146,6 +149,7 @@ public class ProfileActivity extends AppCompatActivity {
                         HashMap<String, Object> map = new HashMap<>();
                         map.put("profilePic", myUri);
                         map.put("username", edit_username.getText().toString());
+                        map.put("email", email);
                         dataRef.child(auth.getCurrentUser().getUid()).updateChildren(map);
                         Toast.makeText(ProfileActivity.this, "Profile Updated!!!", Toast.LENGTH_SHORT).show();
                         setUser(auth.getCurrentUser().getUid());

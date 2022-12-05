@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="padding_signin_signup">30dp</dimen>
+    <dimen name="padding_signin_signup">16dp</dimen>
     <dimen name="poster_width">110dp</dimen>
     <dimen name="poster_height">154dp</dimen>
     <dimen name="news_card_image_height">200dp</dimen>

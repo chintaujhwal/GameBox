@@ -46,8 +46,8 @@
 
     <Button
         android:id="@+id/signinBtn2"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
         android:padding="10dp"
         android:text="@string/signin"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -87,7 +87,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Show password"
-        android:textColor="@color/orange"
         android:checked="false"
         android:buttonTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
