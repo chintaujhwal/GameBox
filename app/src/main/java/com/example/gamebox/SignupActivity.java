@@ -53,6 +53,7 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        getSupportActionBar().hide();
 
         auth=FirebaseAuth.getInstance();
         db=FirebaseDatabase.getInstance();
@@ -154,7 +155,7 @@ public class SignupActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(!task.isSuccessful()){
 
-                    Toast.makeText(SignupActivity.this, "Email already exists", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupActivity.this, "Email Already Exists", Toast.LENGTH_SHORT).show();
                     progress.dismiss();
 
                 }
@@ -165,7 +166,7 @@ public class SignupActivity extends AppCompatActivity {
                     else {
                         uploaduserdata(txt_email, txt_username);
                     }
-                    Toast.makeText(SignupActivity.this,"signed up", Toast.LENGTH_SHORT);
+                    Toast.makeText(SignupActivity.this,"Signed Up", Toast.LENGTH_SHORT);
                     startActivity(new Intent(SignupActivity.this, MainActivity.class));
                     finish();
                 }

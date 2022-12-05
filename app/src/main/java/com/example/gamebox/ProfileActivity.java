@@ -117,8 +117,8 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void updateProfileData() {
-        pd.setTitle("Updating your Profile");
-        pd.setMessage("Please wait!");
+        pd.setTitle("Updating Your Profile");
+        pd.setMessage("Please Wait");
         pd.show();
         if (imageUri.toString().equals(myUri)) {
             HashMap<String, Object> map = new HashMap<>();
@@ -126,7 +126,7 @@ public class ProfileActivity extends AppCompatActivity {
             map.put("username", edit_username.getText().toString());
             map.put("email", email);
             dataRef.child(auth.getCurrentUser().getUid()).updateChildren(map);
-            Toast.makeText(ProfileActivity.this, "Profile Updated!!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ProfileActivity.this, "Profile Updated", Toast.LENGTH_SHORT).show();
             setUser(auth.getCurrentUser().getUid());
             pd.dismiss();
         } else {
@@ -151,13 +151,13 @@ public class ProfileActivity extends AppCompatActivity {
                         map.put("username", edit_username.getText().toString());
                         map.put("email", email);
                         dataRef.child(auth.getCurrentUser().getUid()).updateChildren(map);
-                        Toast.makeText(ProfileActivity.this, "Profile Updated!!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProfileActivity.this, "Profile Updated", Toast.LENGTH_SHORT).show();
                         setUser(auth.getCurrentUser().getUid());
                         pd.dismiss();
                     } else {
                         setUser(auth.getCurrentUser().getUid());
                         pd.dismiss();
-                        Toast.makeText(ProfileActivity.this, "Error Occurred!!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProfileActivity.this, "Error", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

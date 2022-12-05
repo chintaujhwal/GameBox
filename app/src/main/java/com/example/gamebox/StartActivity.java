@@ -33,6 +33,7 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        getSupportActionBar().hide();
 
         auth=FirebaseAuth.getInstance();
 
@@ -61,7 +62,7 @@ public class StartActivity extends AppCompatActivity {
                 txt_email=mEmail.getText().toString();
                 txt_pass=mPass.getText().toString();
                 if(txt_email.isEmpty()&&txt_pass.isEmpty()){
-                    Toast.makeText(StartActivity.this,"enter email and password",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StartActivity.this,"Enter Email and Password",Toast.LENGTH_SHORT).show();
                 }else if (txt_pass.isEmpty()){
                     mPass.setError("password is required");
                     return;

@@ -50,30 +50,32 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         game_poster = findViewById(R.id.game_poster);
-        game_hero=findViewById(R.id.game_hero);
-        game_title=findViewById(R.id.game_title);
-        game_genre=findViewById(R.id.game_genre);
-        games_description=findViewById(R.id.game_description);
-        game_year=findViewById(R.id.game_year);
-        game_rating= findViewById(R.id.game_rating);
-        ratingBar =game_rating.findViewById(R.id.rating_bar);
-        rating_textview=game_rating.findViewById(R.id.rating_value);
+        game_hero = findViewById(R.id.game_hero);
+        game_title = findViewById(R.id.game_title);
+        game_genre = findViewById(R.id.game_genre);
+        games_description = findViewById(R.id.game_description);
+        game_year = findViewById(R.id.game_year);
+        game_rating = findViewById(R.id.game_rating);
+        ratingBar = game_rating.findViewById(R.id.rating_bar);
+        rating_textview = game_rating.findViewById(R.id.rating_value);
 
 
         Bundle bundle = getIntent().getExtras();
         parent = bundle.getString("parent");
 
-        Log.i("parent", "onCreate: "+parent);
+        Log.i("parent", "onCreate: " + parent);
 
 //        Map<String,Object> gamemap=new HashMap<String,Object>();
 //        ArrayMap<String,Object> gamemap=new ArrayMap<String,Object>();\
 
 
-        reference= FirebaseDatabase.getInstance().getReference();
+        reference = FirebaseDatabase.getInstance().getReference();
         auth = FirebaseAuth.getInstance();
 
-        DatabaseReference gameData=reference.child("games").child(parent);
+        DatabaseReference gameData = reference.child("games").child(parent);
 
         gameData.addValueEventListener(new ValueEventListener() {
             @Override
@@ -86,7 +88,7 @@ public class GameActivity extends AppCompatActivity {
                 game_year.setText(gameData1.getYear());
                 games_description.setText(gameData1.getOverview());
                 ratingBar.setRating(Float.parseFloat(gameData1.getRating()));
-                rating_textview.setText(gameData1.getRating());
+                rating_textview.setText(Float.toString(Float.parseFloat(gameData1.getRating())));
             }
 
             @Override
@@ -96,16 +98,13 @@ public class GameActivity extends AppCompatActivity {
         });
 
 
-
-
         Bundle fragBundle = new Bundle();
-        fragBundle.putString("parent",parent);
-
+        fragBundle.putString("parent", parent);
 
 
         TabLayout gameTabLayout = findViewById(R.id.game_tab_layout);
         ViewPager2 gameViewPager = findViewById(R.id.game_viewpager);
-        gameViewPager.setAdapter(new GameFragmentAdapter(getSupportFragmentManager(), getLifecycle(),fragBundle));
+        gameViewPager.setAdapter(new GameFragmentAdapter(getSupportFragmentManager(), getLifecycle(), fragBundle));
 
         gameTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -132,7 +131,6 @@ public class GameActivity extends AppCompatActivity {
         });
 
 
-
 //        Like, Rate and Bookmark
 
         LinearLayout like = findViewById(R.id.like);
@@ -151,9 +149,9 @@ public class GameActivity extends AppCompatActivity {
         rate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(GameActivity.this, RatingActivity.class);
+                Intent intent = new Intent(GameActivity.this, RatingActivity.class);
                 Bundle bundle1 = new Bundle();
-                bundle1.putString("parent",parent);
+                bundle1.putString("parent", parent);
                 intent.putExtras(bundle1);
                 startActivity(intent);
             }
@@ -228,27 +226,28 @@ public class GameActivity extends AppCompatActivity {
 }
 
 class GameFragmentAdapter extends FragmentStateAdapter {
-private Bundle bundle;
-    public GameFragmentAdapter(FragmentManager fragmentManager, Lifecycle lifecycle,Bundle bundle) {
+    private Bundle bundle;
+
+    public GameFragmentAdapter(FragmentManager fragmentManager, Lifecycle lifecycle, Bundle bundle) {
         super(fragmentManager, lifecycle);
-        this.bundle=bundle;
+        this.bundle = bundle;
     }
 
     @Override
     public Fragment createFragment(int position) {
         switch (position) {
             case 1:
-                GameRequirementsFragment obj0= new GameRequirementsFragment();
+                GameRequirementsFragment obj0 = new GameRequirementsFragment();
                 obj0.setArguments(bundle);
                 return obj0;
 
 
             case 2:
-                GameLevelsFragment obj2=new GameLevelsFragment();
-                 obj2.setArguments(bundle);
+                GameLevelsFragment obj2 = new GameLevelsFragment();
+                obj2.setArguments(bundle);
                 return obj2;
         }
-        GameDetailsFragment obj1=new GameDetailsFragment();
+        GameDetailsFragment obj1 = new GameDetailsFragment();
         obj1.setArguments(bundle);
         return obj1;
 //return new GameDetailsFragment();
