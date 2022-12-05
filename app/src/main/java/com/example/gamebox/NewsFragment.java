@@ -23,9 +23,18 @@ public class NewsFragment extends Fragment {
 
         ArrayList<NewsCard> list = new ArrayList<>();
 
-        for (int i = 0; i < 5; i++) {
-            list.add(new NewsCard(R.drawable.pubg, "Explore a new world", "The Game is a 2009 third-person action video game based on James Cameron's 2009 film Avatar."));
-        }
+        list.add(new NewsCard(R.drawable.game_1, "Explore A New World",
+                "Shooter game in which up to one hundred players fight in a battle royale, a type of large-scale last man standing deathmatch"));
+        list.add(new NewsCard(R.drawable.game_2, "You Better Go Now",
+                "A visually stunning third-person action-adventure that will keep you on the edge of your seat"));
+        list.add(new NewsCard(R.drawable.game_3, "Perfect Storm",
+                "Battle Royale game with numerous game modes for every type of game player"));
+        list.add(new NewsCard(R.drawable.game_4, "Save This World",
+                "Explore distant lands, fight bigger and more awe-inspiring machines, and encounter astonishing new tribes as you return to the far-future"));
+        list.add(new NewsCard(R.drawable.game_5, "Everything Lost Is Meant To Be Found",
+                "Explore the intense origin story of Lara Croft and her ascent from a young woman to a hardened survivor"));
+        list.add(new NewsCard(R.drawable.game_6, "Endure And Survive",
+                "New and evolved gameplay systems deliver upon the life-or-death stakes of Ellie's journey through the hostile world"));
 
         NewsAdapter adapter = new NewsAdapter(getActivity(), list);
         ListView listView = rootView.findViewById(R.id.newsFragmentLayout);

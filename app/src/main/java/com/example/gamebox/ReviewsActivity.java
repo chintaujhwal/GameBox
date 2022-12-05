@@ -30,9 +30,16 @@ public class ReviewsActivity extends AppCompatActivity {
 
         ArrayList<ReviewCard> list = new ArrayList<>();
 
-        for (int i = 0; i < 5; i++) {
-            list.add(new ReviewCard(R.drawable.face, "Explore", 4 ,"The Game is a 2009 third-person action video game based on James Cameron's 2009 film Avatar."));
-        }
+        list.add(new ReviewCard(R.drawable.face, "Emma Stone", 5 ,
+                "There were a few things I like about this game, although it fades compared to the fantastic experience I had"));
+        list.add(new ReviewCard(R.drawable.face, "Emma Stone", 3 ,
+                "There were a few things I like about this game, although it fades compared to the fantastic experience I had"));
+        list.add(new ReviewCard(R.drawable.face, "Emma Stone", 4 ,
+                "There were a few things I like about this game, although it fades compared to the fantastic experience I had"));
+        list.add(new ReviewCard(R.drawable.face, "Emma Stone", 4 ,
+                "There were a few things I like about this game, although it fades compared to the fantastic experience I had"));
+        list.add(new ReviewCard(R.drawable.face, "Emma Stone", 4 ,
+                "There were a few things I like about this game, although it fades compared to the fantastic experience I had"));
 
         ReviewAdapter adapter = new ReviewAdapter(ReviewsActivity.this, list);
         ListView listView = findViewById(R.id.reviews);
